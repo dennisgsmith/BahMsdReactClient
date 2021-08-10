@@ -2,8 +2,10 @@ FROM mhart/alpine-node:8 AS build-env
 RUN apk update
 WORKDIR /app
 COPY . .
-RUN yarn install --production
-RUN yarn build
+RUN npm install
+RUN npm run-script build
+RUN npm update
+
 
 FROM alpine
 RUN apk update && apk add ca-certificates nginx && rm -rf /var/cache/apk/*
