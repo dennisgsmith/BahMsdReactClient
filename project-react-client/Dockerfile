@@ -7,6 +7,7 @@ RUN yarn build
 
 FROM alpine
 RUN apk update && apk add ca-certificates nginx && rm -rf /var/cache/apk/*
+RUN rm -rf /run/nginx
 RUN mkdir /run/nginx && touch /run/nginx/nginx.pid
 WORKDIR /app
 COPY --from=build-env /app/build /app
