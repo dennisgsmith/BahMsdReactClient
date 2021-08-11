@@ -1,13 +1,14 @@
-FROM mhart/alpine-node:8 AS build-env
-RUN apk update
+FROM node:14.1-alpine AS build-env
 WORKDIR /app
 COPY . .
 RUN npm install
-RUN npm run-script build
-RUN npm update
 
+ENV PATH="./node_modules/.bin:$PATH"
 
-FROM alpine
+COPY . ./
+RUN npm run build
+
+FROM nginx:1.17-alpine
 RUN apk update && apk add ca-certificates nginx && rm -rf /var/cache/apk/*
 RUN mkdir -p /run/nginx && touch /run/nginx/nginx.pid
 WORKDIR /app
