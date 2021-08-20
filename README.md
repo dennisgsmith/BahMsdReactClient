@@ -1,2 +1,2 @@
 # EventsAppReactClient
-Frontend react client for events registration site.
+Frontend React.js client for events registration site.
